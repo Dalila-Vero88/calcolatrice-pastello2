@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcolatrice Pastello</title>
+    <style>
+        /* Impostazioni base */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f5f5f5;
+        }
+
+        /* Contenitore flessibile che mantiene le proporzioni */
+        .calculator-wrapper {
+            width: min(90vw, 400px); /* Larghezza massima 400px, ma si adatta */
+            aspect-ratio: 1 / 1.5; /* Mantiene le proporzioni */
+        }
+
+        /* Calcolatrice che si adatta al wrapper */
+        .calculator {
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+            background-color: #fefaf6;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* Display */
+        #display {
+            width: 90%;
+            height: 15%;
+            font-size: 2rem;
+            text-align: right;
+            margin: 0 auto 10px;
+            padding: 10px;
+            border: none;
+            background-color: #f8f1f5;
+            color: #4a4a4a;
+            border-radius: 15px;
+        }
+
+        /* Griglia dei pulsanti */
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            height: 75%;
+        }
+
+        /* Pulsanti flessibili */
+        button {
+            width: 100%;
+            height: 100%;
+            font-size: 1.5rem;
+            border: none;
+            background-color: #e7eaf6;
+            color: #4a4a4a;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: all 0.2s ease-in-out;
+        }
+
+        /* Effetto hover */
+        button:hover {
+            background-color: #d4d8f1;
+        }
+
+        /* Pulsante AC */
+        .clear {
+            background-color: #ffb6c1;
+            color: white;
+        }
+
+        .clear:hover {
+            background-color: #ff94aa;
+        }
+
+        /* Pulsanti operatori con verde più tenue */
+        .operator {
+            background-color: #c8e6c9; /* Verde più chiaro */
+            color: white;
+        }
+
+        .operator:hover {
+            background-color: #b2d8b5;
+        }
+
+        /* Pulsante "=" */
+        .equals {
+            background-color: #ffdfba;
+            color: white;
+        }
+
+        .equals:hover {
+            background-color: #ffcb9a;
+        }
+
+        /* Stili responsive per schermi molto piccoli */
+        @media (max-width: 400px) {
+            button {
+                height: 90%;
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator-wrapper">
+        <div class="calculator">
+            <input type="text" id="display" disabled>
+            <div class="buttons">
+                <button class="clear" onclick="clearDisplay()">AC</button>
+                <button onclick="appendToDisplay('7')">7</button>
+                <button onclick="appendToDisplay('8')">8</button>
+                <button onclick="appendToDisplay('9')">9</button>
+                <button class="operator" onclick="appendToDisplay('/')">÷</button>
+                <button onclick="appendToDisplay('4')">4</button>
+                <button onclick="appendToDisplay('5')">5</button>
+                <button onclick="appendToDisplay('6')">6</button>
+                <button class="operator" onclick="appendToDisplay('*')">×</button>
+                <button onclick="appendToDisplay('1')">1</button>
+                <button onclick="appendToDisplay('2')">2</button>
+                <button onclick="appendToDisplay('3')">3</button>
+                <button class="operator" onclick="appendToDisplay('-')">−</button>
+                <button onclick="appendToDisplay('0')">0</button>
+                <button onclick="appendToDisplay('.')">.</button>
+                <button class="equals" onclick="calculateResult()">=</button>
+                <button class="operator" onclick="appendToDisplay('+')">+</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function appendToDisplay(value) {
+            document.getElementById("display").value += value;
+        }
+
+        function clearDisplay() {
+            document.getElementById("display").value = "";
+        }
+
+        function calculateResult() {
+            try {
+                document.getElementById("display").value = eval(document.getElementById("display").value);
+            } catch {
+                document.getElementById("display").value = "Error";
+            }
+        }
+    </script>
+</body>
+</html>
